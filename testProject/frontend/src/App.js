@@ -9,6 +9,7 @@ import RegistrationForm from './components/RegistrationForm';
 import LandingPage from './components/LandingPage';
 import LoginForm from './components/LoginForm';
 import UserDashboard from './components/UserDashboard';
+import ChatBot from './components/ChatBot';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
           <Route path="tasks/edit" element={<TaskUpdateForm />} />
           <Route path="tasks/delete" element={<TaskDelete />} />
           <Route path="tasks/view" element={<TaskList />} />
+          <Route path="chatbot" element={<ChatBot />} />
           {/* Add more routes as needed */}
         </Routes>
       </div>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import './RegistrationForm.css'; // Import CSS for styling
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -12,17 +13,20 @@ const RegistrationForm = () => {
   });
 
   const navigate = useNavigate();
+
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
+
   const [message, setMessage] = useState('');
+
   const handleSubmit = (e) => {
     e.preventDefault();
     axios.post('http://localhost:8000/api/register/', formData)
       .then(response => {
         console.log('User registered successfully:', response.data);
         setMessage(response.data.message);
-        navigate('/landing');
+        navigate('/');
       })
       .catch(error => {
         console.error('Registration failed:', error);
@@ -31,7 +35,7 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div>
+    <div className="registration-container">
       <h2>Registration Form</h2>
       <form onSubmit={handleSubmit}>
         <input type="email" name="email" value={formData.email} onChange={handleChange} placeholder="Email" required />
