@@ -1,13 +1,16 @@
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import User, Task
 from .serializers import UserSerializer, TaskSerializer, RegistrationSerializer
+from drf_yasg.utils import swagger_auto_schema
+from drf_yasg import openapi
 
 class RegistrationAPIView(APIView):
-    permission_classes = (AllowAny,)
-
+    @swagger_auto_schema(operation_description="Register a new user.")
+    @permission_classes([AllowAny])
     def post(self, request):
         request.data['username'] = request.data['email']
         serializer = RegistrationSerializer(data=request.data)
@@ -17,13 +20,15 @@ class RegistrationAPIView(APIView):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 class UserListAPIView(APIView):
-    permission_classes = [IsAuthenticated]
-
+    @swagger_auto_schema(operation_description="Retrieve a list of all users.")
+    @permission_classes([IsAuthenticated])
     def get(self, request):
         users = User.objects.all()
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    @swagger_auto_schema(operation_description="Create a new user.")
+    @permission_classes([IsAuthenticated])
     def post(self, request):
         if request.user.is_superuser:
             serializer = UserSerializer(data=request.data)
@@ -35,22 +40,18 @@ class UserListAPIView(APIView):
             return Response({"error": "You are not authorized to perform this action."}, status=status.HTTP_403_FORBIDDEN)
 
 class TaskListAPIView(APIView):
-    permission_classes = [IsAuthenticated]
-
+    @swagger_auto_schema(operation_description="Retrieve a list of all tasks.")
+    @permission_classes([IsAuthenticated])
     def get(self, request):
         tasks = Task.objects.filter(user=request.user)
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
     def get_queryset(self):
-        # Retrieve all tasks associated with the current user
         return Task.objects.filter(user=self.request.user)
 
-    def list(self, request, *args, **kwargs):
-        queryset = self.get_queryset()
-        serializer = self.get_serializer(queryset, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-
+    @swagger_auto_schema(operation_description="Create a new task.")
+    @permission_classes([IsAuthenticated])
     def post(self, request):
         data = {
             'name': request.data.get('name'),
@@ -64,6 +65,8 @@ class TaskListAPIView(APIView):
             return Response({"message": "Task created successfully", "task": serializer.data}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
+    @swagger_auto_schema(operation_description="Update a task.")
+    @permission_classes([IsAuthenticated])
     def put(self, request, pk):
         try:
             task = Task.objects.get(pk=pk)
@@ -77,6 +80,8 @@ class TaskListAPIView(APIView):
         except Task.DoesNotExist:
             return Response({"error": "Task not found."}, status=status.HTTP_404_NOT_FOUND)
 
+    @swagger_auto_schema(operation_description="Delete a task.")
+    @permission_classes([IsAuthenticated])
     def delete(self, request, pk):
         try:
             task = Task.objects.get(pk=pk)
