@@ -109,7 +109,11 @@ class ChatbotAPIView(APIView):
         user_input = request.data.get('user_input')
 
         # Set up and invoke the ChatGPT model
+<<<<<<< Updated upstream
         openai.api_key = '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'
+=======
+        openai.api_key = 'OPEN_AI_KEY'
+>>>>>>> Stashed changes
         response = None
 
         prompt_template = """You are a chatbot that is interacting with Django and REST API framework built to let users create, view and manage their tasks. Your response should only be a JSON object formatted as follows: 
