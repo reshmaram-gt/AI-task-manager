@@ -1,4 +1,5 @@
 /* UserDashboard.css */
+
 .dashboard-container {
     padding: 20px;
   }
@@ -22,5 +23,22 @@
   .dashboard-link:hover {
     background-color: #007bff;
     color: #fff;
+  }
+  
+  /* Style for the button to go to the chatbot */
+  .dashboard-button {
+    padding: 10px;
+    margin-bottom: 10px;
+    color: #fff;
+    background-color: #28a745; /* Green color */
+    border: none;
+    border-radius: 5px;
+    text-align: center;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+  }
+  
+  .dashboard-button:hover {
+    background-color: #218838; /* Darker green color on hover */
   }
   

@@ -11,6 +11,8 @@ const Dashboard = () => {
         <Link to="/tasks/create" className="dashboard-link">Create Task</Link>
         <Link to="/tasks/edit" className="dashboard-link">Edit Task</Link>
         <Link to="/tasks/delete" className="dashboard-link">Delete Task</Link>
+        {/* Button to go to the chatbot */}
+        <Link to="/chatbot" className="dashboard-button">Go to Chatbot</Link>
       </div>
     </div>
   );
