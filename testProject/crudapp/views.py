@@ -42,6 +42,15 @@ class TaskListAPIView(APIView):
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data, status=status.HTTP_200_OK)
 
+    def get_queryset(self):
+        # Retrieve all tasks associated with the current user
+        return Task.objects.filter(user=self.request.user)
+
+    def list(self, request, *args, **kwargs):
+        queryset = self.get_queryset()
+        serializer = self.get_serializer(queryset, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
     def post(self, request):
         data = {
             'name': request.data.get('name'),
