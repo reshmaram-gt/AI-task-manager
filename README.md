@@ -94,5 +94,5 @@ This application uses an AI chatbot to make API calls to the backend system setu
 
 ## GitHub Links
 
-- **Repository:** [https://github.com/reshmaram-gt/AI-task-manager/tree/chatbot-final](https://github.com/reshmaram-gt/AI-task-manager)
+- **Repository:** [https://github.com/reshmaram-gt/AI-task-manager](https://github.com/reshmaram-gt/AI-task-manager/tree/chatbot-final)
 - **Pull Requests:** [https://github.com/reshmaram-gt/AI-task-manager/pull/4](https://github.com/reshmaram-gt/AI-task-manager/pull/4)
