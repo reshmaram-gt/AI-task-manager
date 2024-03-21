@@ -81,7 +81,7 @@ This application uses an AI chatbot to make API calls to the backend system setu
 
 ### To Run Docker Container
 1. Navigate to `testProject/testProject/settings.py`
-    In DATABASES details, change "HOST" to "db"
+    In DATABASES details, change "HOST" from "localhost" to "db"
 2. From `testProject/testProject`, run
     ```bash
     docker-compose build
