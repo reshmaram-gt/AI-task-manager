@@ -110,11 +110,11 @@ REST_FRAMEWORK = {
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'ENGINE': 'django.db.backends.postgresql',
         'NAME':"taskdb",
         'USER':"postgres",
         'PASSWORD':"password",
-        'HOST':"localhost",
+        'HOST':"localhost", #change to "db" to run on docker container
         'PORT':"5432",
     }
 }
