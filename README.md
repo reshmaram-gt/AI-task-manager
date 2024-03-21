@@ -41,8 +41,11 @@ This application uses an AI chatbot to make API calls to the backend system setu
     ```bash
     pip install -r requirements.txt
     ```
+3. Navigate to 'crudapp/views.py'
 
-3. Apply migrations:
+   Replace `OPENAI_API_KEY' with your_api_key 
+
+4. From root 'testProject' directly, apply migrations:
 
     ```bash
     python manage.py migrate
@@ -61,17 +64,32 @@ This application uses an AI chatbot to make API calls to the backend system setu
     ```bash
     cd frontend
     ```
+2. If required:
 
-2. Start the development server:
+    ```bash
+    npm install
+    ```
+
+3. Start the development server:
 
     ```bash
     npm start
     ```
 
-3. Replace `OPENAI_API_KEY=your_api_key_here` in your environment variables.
-
 - Visit [http://localhost:3000/](http://localhost:3000/) to interact with the app and chatbot.
 - Swagger API Documentation: [http://localhost:8000/swagger/](http://localhost:8000/swagger/)
+
+### To Run Docker Container
+1. Navigate to 'testProject/testProject/settings.py'
+    In DATABASES details, change "HOST" to "db"
+2. From 'testProject/testProject', run
+    ```bash
+    docker-compose build
+    ```
+3.     ```bash
+    docker-compose up
+    ```
+4. Visit [http://localhost:3000/](http://localhost:3000/) to interact with the app and chatbot.
 
 ## GitHub Links
 
